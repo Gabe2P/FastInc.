@@ -12,10 +12,10 @@ public class SceneChanger : MonoBehaviour
     /// </summary>
     public static Action<Scene, Scene> OnSceneChange;
 
-    public void ChangeScene(string nextScene)
+    public static void ChangeScene(string nextScene)
     {
         OnSceneChange?.Invoke(SceneManager.GetActiveScene(), SceneManager.GetSceneByName(nextScene));
         SceneManager.LoadScene(nextScene);
-        SceneManager.SetActiveScene(SceneManager.GetSceneByName(nextScene));
+        //SceneManager.SetActiveScene(SceneManager.GetSceneByName(nextScene));
     }
 }
