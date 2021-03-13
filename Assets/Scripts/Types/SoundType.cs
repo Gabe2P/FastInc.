@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "newSound", menuName = "Type/Sound")]
 public class SoundType : ScriptableObject
 {
     [SerializeField] private AudioClip clip;
@@ -12,7 +13,7 @@ public class SoundType : ScriptableObject
     [SerializeField] private float pitch;
     [SerializeField] private bool loop;
 
-    private List<AudioSource> activeSources = new List<AudioSource>();
+    private AudioSource activeSource = null;
 
     public AudioClip GetAudioClip()
     {
@@ -31,14 +32,14 @@ public class SoundType : ScriptableObject
 
     public void Play()
     {
-        if (activeSources.Count == 0)
+        if (activeSource == null)
         {
             AudioSource source = AudioSourceManager.GetInstance().GetAudioSource();
             if (source != null)
             {
                 UpdateAudioSource(source);
                 source.Play();
-                activeSources.Add(source);
+                activeSource = source;
             }
         }
     }
@@ -50,17 +51,17 @@ public class SoundType : ScriptableObject
         {
             UpdateAudioSource(source);
             source.PlayOneShot(this.clip);
-            activeSources.Add(source);
+            activeSource = source;
         }
     }
 
-    public void StopSound()
+    public void Stop()
     {
-        foreach (AudioSource source in activeSources)
+        if (activeSource != null)
         {
-            source.Stop();
-            AudioSourceManager.GetInstance().ReturnAudioSource(source);
+            activeSource.Stop();
+            AudioSourceManager.GetInstance().ReturnAudioSource(activeSource);
+            activeSource = null;
         }
-        activeSources.Clear();
     }
 }
