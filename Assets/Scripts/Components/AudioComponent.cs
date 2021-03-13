@@ -18,16 +18,22 @@ public class AudioComponent : MonoBehaviour
 
     private void OnEnable()
     {
-        reference.PlaySound += Play;
-        reference.PlayOneShotSound += PlayOneShot;
-        reference.StopSound += Stop;
+        if (reference != null)
+        {
+            reference.PlaySound += Play;
+            reference.PlayOneShotSound += PlayOneShot;
+            reference.StopSound += Stop;
+        }
     }
 
     private void OnDisable()
     {
-        reference.PlaySound -= Play;
-        reference.PlayOneShotSound -= PlayOneShot;
-        reference.StopSound -= Stop;
+        if (reference != null)
+        {
+            reference.PlaySound -= Play;
+            reference.PlayOneShotSound -= PlayOneShot;
+            reference.StopSound -= Stop;
+        }
     }
 
     private void Play(string sound)

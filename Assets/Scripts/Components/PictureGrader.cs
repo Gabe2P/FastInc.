@@ -6,9 +6,13 @@ public class PictureGrader : MonoBehaviour
 {
     public event Action<float> OnPictureGraded;
 
+    [SerializeField] private TattooGunController controller;
+
     public float baseReward;
     public AnimationCurve SpeedRewardCurve = AnimationCurve.Linear(0, 0, 1, 1);
     float timer;
+
+    public int gradingOffset = 1;
 
     public ScreenShotHandler drawingHandler;
     public ScreenShotHandler outlineHandler;
@@ -31,12 +35,14 @@ public class PictureGrader : MonoBehaviour
     {
         if (drawingPic != null && outlinePic != null)
         {
-            float accuracy = TextureComparer.CompareTexture2Ds(drawingPic.Item2, outlinePic.Item2, TextureComparer.CompareFactor.IfAlpha);
-            Debug.LogWarning(accuracy);
+            Debug.Log("Grading Textures");
+            float accuracy = TextureComparer.CompareTexture2Ds(drawingPic.Item2, outlinePic.Item2, TextureComparer.CompareFactor.IfAlpha, 1);
+            Debug.Log("Grade : " + accuracy);
             OnPictureGraded?.Invoke(Mathf.FloorToInt((baseReward * accuracy) * SpeedRewardCurve.Evaluate(timer)));
             timer = 0;
             drawingPic = null;
             outlinePic = null;
+            controller.ClearStrokes();
         }
     }
 
@@ -44,10 +50,12 @@ public class PictureGrader : MonoBehaviour
     {
         if (cam == drawingHandler.gameObject.GetComponent<Camera>())
         {
+            Debug.Log("Image Being Recorded from Camera : " + cam.name);
             drawingPic = new Tuple<Camera, Texture2D>(cam, texture);
         }
         if (cam == outlineHandler.gameObject.GetComponent<Camera>())
         {
+            Debug.Log("Image Being Recorded from Camera : " + cam.name);
             outlinePic = new Tuple<Camera, Texture2D>(cam, texture);
         }
         GradePicture();

@@ -7,80 +7,105 @@ using UnityEngine;
 public class TextureComparer
 {
     public enum CompareFactor { IfAlpha, Alpha, RGB, RGBA}
+    private enum Status { None, Passed, Failed}
 
-    public static float CompareTexture2Ds(Texture2D texture1, Texture2D texture2, CompareFactor compareFactor)
+    public static float CompareTexture2Ds(Texture2D texture1, Texture2D texture2, CompareFactor compareFactor, int offset = 0, int startingPoint = 0)
     {
         Color[] pixels1 = texture1.GetPixels();
         Color[] pixels2 = texture2.GetPixels();
 
         if (pixels1.Length == pixels2.Length)
         {
+            int numberOfChecks = 0;
             int total = 0;
-            for (int i = 0; i < pixels1.Length; i++)
+            Status checkStatus = Status.None;
+            for (int i = startingPoint; i < pixels1.Length; i++)
             {
-                Debug.LogError("Pixel 1: " + pixels1 + "| Pixel 2: " + pixels2);
+                i += offset;
                 switch (compareFactor)
                 {
                     case CompareFactor.IfAlpha:
-                        total += CompareIfAlpha(pixels1[i], pixels2[i]);
+                        checkStatus = CompareIfAlpha(pixels1[i], pixels2[i]);
                         break;
                     case CompareFactor.Alpha:
-                        total += CompareAlpha(pixels1[i], pixels2[i]);
+                        checkStatus = CompareAlpha(pixels1[i], pixels2[i]);
                         break;
                     case CompareFactor.RGB:
-                        total += CompareRGB(pixels1[i], pixels2[i]);
+                        checkStatus = CompareRGB(pixels1[i], pixels2[i]);
                         break;
                     case CompareFactor.RGBA:
-                        total += CompareRGBA(pixels1[i], pixels2[i]);
+                        checkStatus = CompareRGBA(pixels1[i], pixels2[i]);
+                        break;
+                }
+                switch (checkStatus)
+                {
+                    case Status.None:
+                        break;
+                    case Status.Passed:
+                        total++;
+                        numberOfChecks++;
+                        break;
+                    case Status.Failed:
+                        numberOfChecks++;
                         break;
                 }
             }
-            return (float)total / pixels1.Length;
+            if (numberOfChecks == 0)
+            {
+                return 0;
+            }
+            Debug.Log("Total Number of checks done: " + numberOfChecks);
+            return (float)total / numberOfChecks;
         }
         return -1f;
     }
 
-    private static int CompareIfAlpha(Color pixel1, Color pixel2)
+    private static Status CompareIfAlpha(Color pixel1, Color pixel2)
     {
         if (pixel1.a > 0 && pixel2.a > 0)
         {
-            return 1;
+            Debug.Log("Check Passed = Pixel 1 Alpha: " + pixel1.a + " | Pixel 2 Alpha: " + pixel2.a);
+            return Status.Passed;
         }
-        if (pixel1.a == 0 && pixel2.a == 0)
+        if ((pixel1.a == 0 && pixel2.a != 0) || (pixel1.a != 0 && pixel2.a == 0))
         {
-            return 1;
+            Debug.Log("Check Failed = Pixel 1 Alpha: " + pixel1.a + " | Pixel 2 Alpha: " + pixel2.a);
+            return Status.Failed;
         }
-        return 0;
+        Debug.Log("Pixel 1 Alpha: " + pixel1.a + " | Pixel 2 Alpha: " + pixel2.a);
+        return Status.None;
     }
 
-    private static int CompareAlpha(Color pixel1, Color pixel2)
+    private static Status CompareAlpha(Color pixel1, Color pixel2)
     {
         if (pixel1.a == pixel2.a)
         {
-            return 1;
+            Debug.Log("Check Passed = Pixel 1 Alpha: " + pixel1.a + " | Pixel 2 Alpha: " + pixel2.a);
+            return Status.Passed;
         }
-        return 0;
+        Debug.Log("Pixel 1 Alpha: " + pixel1.a + " | Pixel 2 Alpha: " + pixel2.a);
+        return Status.Failed;
     }
 
-    private static int CompareRGB(Color pixel1, Color pixel2)
+    private static Status CompareRGB(Color pixel1, Color pixel2)
     {
-        if (pixel1.r > 0 && pixel2.r > 0)
+        if (pixel1.r == pixel2.r && pixel1.g == pixel2.g && pixel1.b == pixel2.b)
         {
-            return 1;
+            Debug.Log("Check Passed = Pixel 1 RGB: " + pixel1.r + "/" + pixel1.g + "/" + pixel1.b + " | Pixel 2 RGB: " + pixel2.r + "/" + pixel2.g + "/" + pixel2.b);
+            return Status.Passed;
         }
-        if (pixel1.a == 0 && pixel2.a == 0)
-        {
-            return 1;
-        }
-        return 0;
+        Debug.Log("Check Failed = Pixel 1 RGB: " + pixel1.r + "/" + pixel1.g + "/" + pixel1.b + " | Pixel 2 RGB: " + pixel2.r + "/" + pixel2.g + "/" + pixel2.b);
+        return Status.Failed; ;
     }
 
-    private static int CompareRGBA(Color pixel1, Color pixel2)
+    private static Status CompareRGBA(Color pixel1, Color pixel2)
     {
         if (pixel1 == pixel2)
         {
-            return 1;
+            Debug.Log("Check Succeeded = Pixel 1 RGBA: " + pixel1 + " | Pixel 2 RGBA: " + pixel2);
+            return Status.Passed;
         }
-        return 0;
+        Debug.Log("Check Failed = Pixel 1 RGBA: " + pixel1 + " | Pixel 2 RGBA: " + pixel2);
+        return Status.Failed;
     }
 }
