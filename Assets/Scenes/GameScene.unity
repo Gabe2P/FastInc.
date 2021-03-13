@@ -154,9 +154,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20b03b6a773b5ac47a6999ee5eccbc98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 500
-  height: 500
-  depth: 16
+  width: 64
+  height: 64
+  depth: 4
 --- !u!20 &39301508
 Camera:
   m_ObjectHideFlags: 0
@@ -184,7 +184,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 2.5
   m_Depth: -2
   m_CullingMask:
     serializedVersion: 2
@@ -207,13 +207,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 39301506}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.47786823, y: -0.30859795, z: -1.3433782}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!1 &319496198
 GameObject:
   m_ObjectHideFlags: 0
@@ -244,9 +244,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20b03b6a773b5ac47a6999ee5eccbc98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 500
-  height: 500
-  depth: 16
+  width: 64
+  height: 64
+  depth: 4
 --- !u!20 &319496200
 Camera:
   m_ObjectHideFlags: 0
@@ -274,7 +274,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 2.5
   m_Depth: -2
   m_CullingMask:
     serializedVersion: 2
@@ -297,13 +297,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 319496198}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.47786823, y: -0.30859795, z: -1.3433782}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!1 &323949471
 GameObject:
   m_ObjectHideFlags: 0
@@ -1678,7 +1678,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 8, y: 8}
+  m_Size: {x: 5, y: 8.9}
   m_EdgeRadius: 0
 --- !u!1 &1182154534
 GameObject:
@@ -2056,7 +2056,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9ad61d36cdfe064d93a295e6f94dbfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grader: {fileID: 1484547737}
+  grader: {fileID: 0}
 --- !u!4 &1477224819
 Transform:
   m_ObjectHideFlags: 0
@@ -2239,7 +2239,6 @@ GameObject:
   - component: {fileID: 1484547736}
   - component: {fileID: 1484547735}
   - component: {fileID: 1484547734}
-  - component: {fileID: 1484547737}
   m_Layer: 5
   m_Name: Finished Button
   m_TagString: Untagged
@@ -2335,7 +2334,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 39301507}
+      - m_Target: {fileID: 319496199}
         m_TargetAssemblyTypeName: ScreenShotHandler, Assembly-CSharp
         m_MethodName: TakeScreenShot
         m_Mode: 1
@@ -2347,7 +2346,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 319496199}
+      - m_Target: {fileID: 673083649}
+        m_TargetAssemblyTypeName: TattooRandomizer, Assembly-CSharp
+        m_MethodName: RandomizeTattoo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 39301507}
         m_TargetAssemblyTypeName: ScreenShotHandler, Assembly-CSharp
         m_MethodName: TakeScreenShot
         m_Mode: 1
@@ -2397,45 +2408,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1484547732}
   m_CullTransparentMesh: 1
---- !u!114 &1484547737
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1484547732}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe738833a8a7ff74b8d1414a5ed91c91, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  baseReward: 100
-  SpeedRewardCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 1
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  drawingHandler: {fileID: 319496199}
-  outlineHandler: {fileID: 39301507}
 --- !u!1 &1494633448
 GameObject:
   m_ObjectHideFlags: 0
@@ -2907,6 +2879,78 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1717494182}
   m_CullTransparentMesh: 0
+--- !u!1 &1749730246
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1749730248}
+  - component: {fileID: 1749730247}
+  m_Layer: 0
+  m_Name: Grader
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1749730247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1749730246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe738833a8a7ff74b8d1414a5ed91c91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: {fileID: 840192889}
+  baseReward: 100
+  SpeedRewardCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  gradingOffset: 0
+  drawingHandler: {fileID: 319496199}
+  outlineHandler: {fileID: 39301507}
+--- !u!4 &1749730248
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1749730246}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.5134164, y: -0.748198, z: -11.910295}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1754401389
 GameObject:
   m_ObjectHideFlags: 0
