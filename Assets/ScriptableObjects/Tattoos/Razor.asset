@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Razor
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 9e7b8a3d51809bd48a831de301e5843a, type: 3}
+  RequiredColor: 0
   isHairy: 0
-  difficulty: 0
+  difficulty: 2
   prefab: {fileID: 1301006104656572392, guid: 888df97b9a1860a43999f322de745c94, type: 3}

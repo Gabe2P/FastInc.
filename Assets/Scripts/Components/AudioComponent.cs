@@ -5,7 +5,6 @@ using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(ICallAudioEvents))]
 public class AudioComponent : MonoBehaviour
 {
     private ICallAudioEvents reference = null;
@@ -36,7 +35,7 @@ public class AudioComponent : MonoBehaviour
         }
     }
 
-    private void Play(string sound)
+    public void Play(string sound)
     {
         SoundType s = sounds.Where(x => x.name == sound).FirstOrDefault();
         if (s != null)
@@ -45,7 +44,7 @@ public class AudioComponent : MonoBehaviour
         }
     }
 
-    private void PlayOneShot(string sound)
+    public void PlayOneShot(string sound)
     {
         SoundType s = sounds.Where(x => x.name == sound).FirstOrDefault();
         if (s != null)
@@ -54,7 +53,7 @@ public class AudioComponent : MonoBehaviour
         }
     }
 
-    private void Stop(string sound)
+    public void Stop(string sound)
     {
         SoundType s = sounds.Where(x => x.name == sound).FirstOrDefault();
         if (s != null)

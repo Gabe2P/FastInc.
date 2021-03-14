@@ -61,7 +61,10 @@ public class TattooGunController : MonoBehaviour, ICallAudioEvents
             }
             if (Input.GetMouseButton(0))
             {
-
+                if (curRenderer == null)
+                {
+                    CreateBrush();
+                }
                 Vector2 curPos = cam.ScreenToWorldPoint(Input.mousePosition);
                 if (curPos != previousPos)
                 {

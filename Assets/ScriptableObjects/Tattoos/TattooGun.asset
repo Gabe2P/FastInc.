@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: TattooGun
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: af716359f3c32a24bab220e1d13e6b85, type: 3}
+  RequiredColor: 0
   isHairy: 0
-  difficulty: 0
+  difficulty: 3
   prefab: {fileID: 8819772699378151827, guid: 99a0a261fa542c64597fbe0c0cc40e3c, type: 3}

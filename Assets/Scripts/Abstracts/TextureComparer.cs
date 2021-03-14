@@ -62,15 +62,18 @@ public class TextureComparer
 
     private static Status CompareIfAlpha(Color pixel1, Color pixel2)
     {
-        if (pixel1.a > 0 && pixel2.a > 0)
+        if ((pixel1.a > 0 && pixel2.a > 0))
         {
             Debug.Log("Check Passed = Pixel 1 Alpha: " + pixel1.a + " | Pixel 2 Alpha: " + pixel2.a);
             return Status.Passed;
         }
-        if ((pixel1.a == 0 && pixel2.a != 0) || (pixel1.a != 0 && pixel2.a == 0))
+        else
         {
-            Debug.Log("Check Failed = Pixel 1 Alpha: " + pixel1.a + " | Pixel 2 Alpha: " + pixel2.a);
-            return Status.Failed;
+            if ((pixel1.a == 0 && pixel2.a != 0) || (pixel1.a != 0 && pixel2.a == 0))
+            {
+                Debug.Log("Check Failed = Pixel 1 Alpha: " + pixel1.a + " | Pixel 2 Alpha: " + pixel2.a);
+                return Status.Failed;
+            }
         }
         Debug.Log("Pixel 1 Alpha: " + pixel1.a + " | Pixel 2 Alpha: " + pixel2.a);
         return Status.None;

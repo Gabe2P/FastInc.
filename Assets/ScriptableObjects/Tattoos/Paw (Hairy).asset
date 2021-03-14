@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f39a4cac93c67404b8a78451bb47c2df, type: 3}
+  m_Name: Paw (Hairy)
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 21300000, guid: f745c99248a856a43b8aba786cf40a53, type: 3}
+  RequiredColor: 0
+  isHairy: 1
+  difficulty: 0
+  prefab: {fileID: 6001432211677910757, guid: e287bdaa0fec6564d9b5495b231f4945, type: 3}

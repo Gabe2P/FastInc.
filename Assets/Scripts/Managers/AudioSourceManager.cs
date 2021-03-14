@@ -34,13 +34,30 @@ public class AudioSourceManager : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        SceneChanger.OnSceneChange += ResetSelf;
+    }
+
+    private void OnDisable()
+    {
+        SceneChanger.OnSceneChange -= ResetSelf;
+    }
+
     private void Update()
     {
         for (int i = 0; i < active.Count; i++)
         {
-            if (!active[i].isPlaying && Time.timeScale > 0)
+            if (active[i] != null)
             {
-                available.Enqueue(active[i]);
+                if (!active[i].isPlaying && Time.timeScale > 0)
+                {
+                    available.Enqueue(active[i]);
+                    active.RemoveAt(i);
+                }
+            }
+            else
+            {
                 active.RemoveAt(i);
             }
         }
@@ -71,5 +88,11 @@ public class AudioSourceManager : MonoBehaviour
     public void ReturnAudioSource(AudioSource source)
     {
         available.Enqueue(source);
+    }
+
+    private void ResetSelf(UnityEngine.SceneManagement.Scene oldScene, UnityEngine.SceneManagement.Scene newScene)
+    {
+        available.Clear();
+        active.Clear();
     }
 }
