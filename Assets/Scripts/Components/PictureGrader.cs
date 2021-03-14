@@ -9,7 +9,7 @@ public class PictureGrader : MonoBehaviour
     [SerializeField] private TattooGunController controller;
 
     public float baseReward;
-    public AnimationCurve SpeedRewardCurve = AnimationCurve.Linear(0, 0, 1, 1);
+    public AnimationCurve SpeedRewardCurve = AnimationCurve.Linear(0, 1, 1, 0);
     float timer;
 
     public int gradingOffset = 1;
@@ -38,7 +38,14 @@ public class PictureGrader : MonoBehaviour
             Debug.Log("Grading Textures");
             float accuracy = TextureComparer.CompareTexture2Ds(drawingPic.Item2, outlinePic.Item2, TextureComparer.CompareFactor.IfAlpha, 1);
             Debug.Log("Grade : " + accuracy);
-            OnPictureGraded?.Invoke(Mathf.FloorToInt((baseReward * accuracy) * SpeedRewardCurve.Evaluate(timer)));
+            if (accuracy != 0)
+            {
+                OnPictureGraded?.Invoke(Mathf.FloorToInt((baseReward * accuracy) * (1 + SpeedRewardCurve.Evaluate(timer))));
+            }
+            else
+            {
+                OnPictureGraded?.Invoke(0);
+            }
             timer = 0;
             drawingPic = null;
             outlinePic = null;

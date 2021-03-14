@@ -20,8 +20,8 @@ public class TattooGunController : MonoBehaviour, ICallAudioEvents
     public Texture2D cursorImage = null;
     public Texture2D DefaultcursorImage = null;
     public float cursorImageScale = .5f;
-    private Color curColor = Color.white;
-    private float curThickness = .1f;
+    [SerializeField] private Color curColor = Color.black;
+    [SerializeField] private float curThickness = .03f;
     private LineRenderer curRenderer = null;
     private Vector2 previousPos = Vector2.zero;
 
