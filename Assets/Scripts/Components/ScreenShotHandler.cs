@@ -18,6 +18,16 @@ public class ScreenShotHandler : MonoBehaviour
         cam = GetComponent<Camera>();
     }
 
+    private void OnEnable()
+    {
+        CallScreenShot.OnTakeScreenShot += TakeScreenShot;
+    }
+
+    private void OnDisable()
+    {
+        CallScreenShot.OnTakeScreenShot -= TakeScreenShot;
+    }
+
     private void OnPostRender()
     {
         if (takePicturesNextFrame)

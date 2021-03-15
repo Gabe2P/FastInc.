@@ -7,8 +7,16 @@ using UnityEngine.UI;
 
 public class MainMenuController : MonoBehaviour
 {
+    public Animator anim = null;
+
+    public void PlayAnimation()
+    {
+        anim.SetTrigger("Slide");
+        Invoke("NextScene", 1f);
+    }
+
     // Update is called once per frame
-    void StartGame(string scene)
+    public void NextScene(string scene)
     {
         SceneChanger.ChangeScene(scene);
     }

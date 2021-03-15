@@ -14,8 +14,9 @@ public class SceneChanger : MonoBehaviour
 
     public static void ChangeScene(string nextScene)
     {
-        OnSceneChange?.Invoke(SceneManager.GetActiveScene(), SceneManager.GetSceneByName(nextScene));
+        Scene previous = SceneManager.GetActiveScene();
         SceneManager.LoadScene(nextScene);
+        OnSceneChange?.Invoke(previous, SceneManager.GetSceneByBuildIndex(SceneUtility.GetBuildIndexByScenePath(nextScene)));
         //SceneManager.SetActiveScene(SceneManager.GetSceneByName(nextScene));
     }
 }

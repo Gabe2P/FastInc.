@@ -32,13 +32,17 @@ public class GameManager : MonoBehaviour
 
     private void UpdatePauseFlag(UnityEngine.SceneManagement.Scene previous, UnityEngine.SceneManagement.Scene next)
     {
+        Debug.Log("I've Been Called");
+        Debug.Log("Previous Scene: " + previous.name + " | Next Scene: " + next.name);
         if (next.name != "MainMenuScene")
         {
+            Debug.Log("I've Made it Here");  
             canPause = true;
         }
         else
         {
             canPause = false;
+            ResumeGame();
         }
     }
 
